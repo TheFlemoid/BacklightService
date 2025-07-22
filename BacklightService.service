@@ -1,0 +1,8 @@
+[Unit]
+Description=BacklightService
+
+[Service]
+ExecStart=/opt/BacklightService/BacklightService.py
+
+[Install]
+WantedBy=multi-user.target
