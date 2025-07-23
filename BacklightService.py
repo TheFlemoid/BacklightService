@@ -17,8 +17,6 @@ GPIO.setup(19, GPIO.IN)
 GPIO.setup(26, GPIO.OUT) 
 
 while True:
-    sleep(0.25)
-
     now = datetime.datetime.now()
 
     # Converting the early and late time Strings to be the current date
@@ -32,16 +30,14 @@ while True:
     lateDateTime = datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=calendar.timegm(lateTime))
 
     if (now < earlyDateTime or now > lateDateTime):
-        print("LEDs should be active")
+        sleep(0.5)
+        #LEDs should be active
+        if GPIO.input(19) == 1:
+            GPIO.output(26, True)
+        else:
+            GPIO.output(26, False)
     else:
-        print("LEDs should not be active")
+        #LEDs should not be active
         GPIO.output(26, False)
-        sleep(5)
-
-    if GPIO.input(19) == 1:
-        GPIO.output(26, True)
-    else:
-        GPIO.output(26, False)
-
-    print(now)
+        sleep(10)
 
